@@ -1,18 +1,26 @@
 enum Paths {
   featureName('feature_name'),
   domain('domain'),
-  domainEntities('domain.entities'),
-  domainUseCases('domain.usecases'),
-  domainRepositories('domain.repositories'),
+  domainEntities('entities'),
+  domainUseCases('usecases'),
+  domainRepositories('repositories'),
   application('application'),
-  applicationUseCases('application.usecases'),
+  applicationUseCases('usecases'),
   infrastructure('infrastructure'),
-  infrastructureRepositories('infrastructure.repositories'),
-  infrastructureDataSources('infrastructure.datasources'),
+  infrastructureRepositories('epositories'),
+  infrastructureDataSources('datasources'),
   presentation('presentation'),
-  presentationPage('presentation.page'),
-  presentationNotifiers('presentation.notifiers'),
-  presentationNotifierStates('presentation.notifiers.LoginNotifier.states');
+  presentationPage('page'),
+  presentationNotifiers('notifiers'),
+  presentationNotifierStates('states'),
+  fields('fields'),
+  id('id'),
+  type('type'),
+  methods('methods'),
+  returns('returns'),
+  params('params'),
+  implements('implements'),
+  dependencies('dependencies');
 
   const Paths(this.path);
   final String path;
