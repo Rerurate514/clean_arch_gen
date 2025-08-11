@@ -8,7 +8,7 @@ part 'abstract_repository.g.dart';
 sealed class AbstractRepository with _$AbstractRepository {
   const factory AbstractRepository({
     required String name,
-    required Method methods
+    required List<Method> methods
   }) = _AbstractRepository;
 
   factory AbstractRepository.fromJson(Map<String, dynamic> json) => _$AbstractRepositoryFromJson(json);
