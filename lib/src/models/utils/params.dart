@@ -5,8 +5,7 @@ part 'params.g.dart';
 
 @freezed
 sealed class Params with _$Params {
-
-  factory Params({
+  const factory Params({
     required String name,
     required String type
   }) = _Params;

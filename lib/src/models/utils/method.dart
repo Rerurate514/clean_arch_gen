@@ -6,8 +6,7 @@ part 'method.g.dart';
 
 @freezed
 sealed class Method with _$Method {
-
-  factory Method({
+  const factory Method({
     required String name,
     required String returns,
     required List<Params> params

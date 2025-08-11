@@ -6,8 +6,7 @@ part 'entities.g.dart';
 
 @freezed
 sealed class Entities with _$Entities {
-
-  factory Entities({
+  const factory Entities({
     required List<ClassFields> classFields
   }) = _Entities;
 

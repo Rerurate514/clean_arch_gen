@@ -5,8 +5,7 @@ part 'datasource.g.dart';
 
 @freezed
 sealed class DataSource with _$DataSource {
-
-  factory DataSource({
+  const factory DataSource({
     required String name
   }) = _DataSource;
 

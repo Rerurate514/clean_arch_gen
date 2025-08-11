@@ -6,8 +6,7 @@ part 'datasources.g.dart';
 
 @freezed
 sealed class DataSources with _$DataSources {
-
-  factory DataSources({
+  const factory DataSources({
     required List<DataSource> datasource
   }) = _DataSources;
 
