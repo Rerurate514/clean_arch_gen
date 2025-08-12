@@ -9,9 +9,9 @@ part 'infrastructure.g.dart';
 @freezed
 sealed class Infrastructure with _$Infrastructure {
   const factory Infrastructure({
-    required Response response,
-    required Repository repository,
-    required DataSource dataSource,
+    required List<Response> responses,
+    required List<Repository> repositories,
+    required List<DataSource> dataSources,
   }) = _Infrastructure;
 
   factory Infrastructure.fromJson(Map<String, dynamic> json) => _$InfrastructureFromJson(json);
