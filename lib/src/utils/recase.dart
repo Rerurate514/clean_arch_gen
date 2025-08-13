@@ -15,3 +15,10 @@ String toLowerCamelCase(String text) {
   
   return result;
 }
+
+String toLowerSnakeCase(String text) {
+  return text
+      .replaceAllMapped(RegExp(r'([A-Z])'), (Match m) => '_${m.group(1)}')
+      .toLowerCase()
+      .replaceAll(RegExp(r'[\s-]+'), '_');
+}
