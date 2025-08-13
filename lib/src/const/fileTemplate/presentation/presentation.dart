@@ -1,0 +1,4 @@
+enum Presentation {
+  notifier,
+  pages
+}
