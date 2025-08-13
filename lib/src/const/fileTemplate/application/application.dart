@@ -1,4 +1,4 @@
-enum Application {
+enum ApplicationLayer {
   extension,
   usecase,
 }

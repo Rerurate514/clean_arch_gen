@@ -1,4 +1,4 @@
-enum Domain {
+enum DomainLayer {
   entity,
   factory,
   repositoy,

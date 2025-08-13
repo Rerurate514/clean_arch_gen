@@ -1,4 +1,4 @@
-enum Presentation {
+enum PresentationLayer {
   notifier,
   pages
 }

@@ -1,4 +1,4 @@
-enum Infrastructure {
+enum InfrastructureLayer {
   datasource,
   factory,
   model,
