@@ -8,6 +8,18 @@ abstract class FileSystemService {
   Future<void> createDirectory(String path, {bool recursive = true});
 }
 
+class RealFileSystemService implements FileSystemService {
+  @override
+  Future<bool> directoryExists(String path) async {
+    return Directory(path).exists();
+  }
+
+  @override
+  Future<void> createDirectory(String path, {bool recursive = true}) async {
+    await Directory(path).create(recursive: recursive);
+  }
+}
+
 class DirectoryCreater {
   final File yaml;
   final FileSystemService fileSystemService;
