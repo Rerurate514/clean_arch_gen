@@ -1,10 +1,5 @@
 import 'dart:io';
 
-import 'package:clean_arch_gen/src/const/fileTemplate/infrastructure/datasource.dart';
-import 'package:clean_arch_gen/src/const/fileTemplate/infrastructure/factory.dart';
-import 'package:clean_arch_gen/src/const/fileTemplate/infrastructure/infrastructure.dart';
-import 'package:clean_arch_gen/src/const/fileTemplate/infrastructure/model.dart';
-import 'package:clean_arch_gen/src/const/fileTemplate/infrastructure/repository.dart';
 import 'package:clean_arch_gen/src/const/fileTemplate/presentation/notifier.dart';
 import 'package:clean_arch_gen/src/const/fileTemplate/presentation/pages.dart';
 import 'package:clean_arch_gen/src/const/fileTemplate/presentation/presentation.dart';
