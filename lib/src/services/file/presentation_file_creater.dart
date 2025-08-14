@@ -11,11 +11,8 @@ import 'package:clean_arch_gen/src/const/fileTemplate/presentation/presentation.
 import 'package:clean_arch_gen/src/const/layers.dart';
 import 'package:clean_arch_gen/src/models/domain/abstract_usecase.dart';
 import 'package:clean_arch_gen/src/models/domain/domain.dart';
-import 'package:clean_arch_gen/src/models/domain/entity.dart';
-import 'package:clean_arch_gen/src/models/infrastructure/datasource.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/infrastructure.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/repository.dart';
-import 'package:clean_arch_gen/src/models/infrastructure/response.dart';
 import 'package:clean_arch_gen/src/models/presentation/notifier.dart';
 import 'package:clean_arch_gen/src/models/presentation/presentation.dart';
 import 'package:clean_arch_gen/src/services/file/directory_creater.dart';
