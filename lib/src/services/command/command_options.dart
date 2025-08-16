@@ -60,19 +60,22 @@ extension CommandOptionsEx on CommandOptions {
     if (command.isEmpty) {
       throw Exception('実行コマンドを生成できません');
     }
+    // print(file.parent.path);
+    // Process process = await Process.start(
+    //   command[0],
+    //   command.sublist(1),
+    //   workingDirectory: file.parent.path,
+    // );
+    
+    // process.stdout.transform(utf8.decoder).listen(stdout.write);
+    // process.stderr.transform(utf8.decoder).listen(stderr.write);
+    
+    // int exitCode = await process.exitCode;
+    // if (exitCode != 0) {
+    //   exit(exitCode);
+    // }
 
-    Process process = await Process.start(
-      command[0],
-      command.sublist(1),
-      workingDirectory: file.parent.path,
-    );
+    String fileContent = await file.readAsString();
     
-    process.stdout.transform(utf8.decoder).listen(stdout.write);
-    process.stderr.transform(utf8.decoder).listen(stderr.write);
-    
-    int exitCode = await process.exitCode;
-    if (exitCode != 0) {
-      exit(exitCode);
-    }
   }
 }
