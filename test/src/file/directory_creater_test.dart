@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:clean_arch_gen/src/services/file/directory_creater.dart';
+import 'package:clean_arch_gen/src/services/file/file_system_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
@@ -32,6 +33,11 @@ class TestFileSystemService implements FileSystemService {
   void reset() {
     _existingDirs.clear();
     _createdDirs.clear();
+  }
+  
+  @override
+  Future<void> writeAsString(File file, String contents) {
+    throw UnimplementedError();
   }
 }
 
