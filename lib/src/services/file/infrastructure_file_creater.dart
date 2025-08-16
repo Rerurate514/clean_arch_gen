@@ -12,46 +12,48 @@ import 'package:clean_arch_gen/src/models/infrastructure/datasource.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/infrastructure.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/repository.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/response.dart';
-import 'package:clean_arch_gen/src/services/file/directory_creater.dart';
+import 'package:clean_arch_gen/src/services/file/file_system_service.dart';
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 
 class InfrastructureFileCreater {
-  final DirectoryCreater directoryCreater;
+  final FileSystemService fileSystemService;
 
-  InfrastructureFileCreater(this.directoryCreater);
+  InfrastructureFileCreater(this.fileSystemService);
 
   void create(File yaml, Infrastructure infra, Domain domain) {
     final layerDir = "${yaml.parent}/${Layers.infrastructure}/";
 
-    for(final subDir in InfrastructureLayer.values){
+    for (final subDir in InfrastructureLayer.values) {
       final path = File("$layerDir/${subDir.name}");
-      switch(subDir) {
+      switch (subDir) {
         case InfrastructureLayer.datasource:
           for (final pair in IterableZip([infra.responses, infra.dataSources])) {
-            path.writeAsString(
-              createDataSource(pair[0] as Response, pair[1] as DataSource)
+            fileSystemService.writeAsString(
+              path,
+              createDataSource(pair[0] as Response, pair[1] as DataSource),
             );
           }
           break;
         case InfrastructureLayer.factory:
           for (final pair in IterableZip([domain.entities, infra.repositories, infra.responses])) {
-            path.writeAsString(
-              createInfrastructureFactory(pair[0] as Entity, pair[1] as Repository, pair[2] as Response)
+            fileSystemService.writeAsString(
+              path,
+              createInfrastructureFactory(
+                  pair[0] as Entity, pair[1] as Repository, pair[2] as Response),
             );
           }
           break;
         case InfrastructureLayer.model:
           for (final pair in IterableZip([infra.responses])) {
-            path.writeAsString(
-              createModel(pair[0])
-            );
+            fileSystemService.writeAsString(path, createModel(pair[0]));
           }
           break;
         case InfrastructureLayer.repositoy:
           for (final pair in IterableZip([domain.entities, infra.repositories, infra.dataSources])) {
-            path.writeAsString(
-              createRepository(pair[0] as Entity, pair[1] as Repository, pair[2] as DataSource)
+            fileSystemService.writeAsString(
+              path,
+              createRepository(pair[0] as Entity, pair[1] as Repository, pair[2] as DataSource),
             );
           }
           break;

@@ -10,31 +10,32 @@ import 'package:clean_arch_gen/src/models/infrastructure/infrastructure.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/repository.dart';
 import 'package:clean_arch_gen/src/models/presentation/notifier.dart';
 import 'package:clean_arch_gen/src/models/presentation/presentation.dart';
-import 'package:clean_arch_gen/src/services/file/directory_creater.dart';
+import 'package:clean_arch_gen/src/services/file/file_system_service.dart';
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 
 class PresentationFileCreater {
-  final DirectoryCreater directoryCreater;
+  final FileSystemService fileSystemService;
 
-  PresentationFileCreater(this.directoryCreater);
+  PresentationFileCreater(this.fileSystemService);
 
   void create(File yaml, Presentation presentation, Infrastructure infra, Domain domain) {
     final layerDir = "${yaml.parent}/${Layers.presentation}/";
 
-    for(final subDir in PresentationLayer.values){
+    for (final subDir in PresentationLayer.values) {
       final path = File("$layerDir/${subDir.name}");
-      switch(subDir) {
+      switch (subDir) {
         case PresentationLayer.notifier:
           for (final pair in IterableZip([infra.repositories, domain.usecases, presentation.notifiers])) {
-            path.writeAsString(
-              createNotifier(pair[0] as Repository, pair[1] as AbstractUsecase, pair[2] as Notifier)
+            fileSystemService.writeAsString(
+              path,
+              createNotifier(pair[0] as Repository, pair[1] as AbstractUsecase, pair[2] as Notifier),
             );
           }
           break;
         case PresentationLayer.pages:
-          for(final page in presentation.pages){
-            createPages(page);
+          for (final page in presentation.pages) {
+            fileSystemService.writeAsString(path, createPages(page));
           }
           break;
       }
