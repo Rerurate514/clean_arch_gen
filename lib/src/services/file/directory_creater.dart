@@ -2,23 +2,7 @@ import 'dart:io';
 
 import 'package:clean_arch_gen/src/const/dirs.dart';
 import 'package:clean_arch_gen/src/const/layers.dart';
-
-abstract class FileSystemService {
-  Future<bool> directoryExists(String path);
-  Future<void> createDirectory(String path, {bool recursive = true});
-}
-
-class RealFileSystemService implements FileSystemService {
-  @override
-  Future<bool> directoryExists(String path) async {
-    return Directory(path).exists();
-  }
-
-  @override
-  Future<void> createDirectory(String path, {bool recursive = true}) async {
-    await Directory(path).create(recursive: recursive);
-  }
-}
+import 'package:clean_arch_gen/src/services/file/file_system_service.dart';
 
 class DirectoryCreater {
   final File yaml;
