@@ -19,6 +19,7 @@ class RealFileSystemService implements FileSystemService {
   
   @override
   Future<void> writeAsString(File file, String contents) async  {
+    print("created file: ${file.path}");
     await file.writeAsString(contents);
   }
 }

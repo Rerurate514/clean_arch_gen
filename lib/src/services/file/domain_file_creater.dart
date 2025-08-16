@@ -7,6 +7,7 @@ import 'package:clean_arch_gen/src/models/domain/entity.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/infrastructure.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/response.dart';
 import 'package:clean_arch_gen/src/services/file/file_system_service.dart';
+import 'package:clean_arch_gen/src/utils/recase.dart';
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:clean_arch_gen/src/const/fileTemplate/domain/domain.dart';
@@ -28,29 +29,44 @@ class DomainFileCreater {
       switch (subDir) {
         case DomainLayer.entity:
           for (final entity in domain.entities) {
-            fileSystemService.writeAsString(path, createEntity(entity));
+            final entityFile = File("${path.path}/${entity.name.toLowerSnakeCase()}.dart");
+            fileSystemService.writeAsString(
+              entityFile, 
+              createEntity(entity)
+            );
           }
           break;
 
         case DomainLayer.repository:
           for (final pair in IterableZip([domain.entities, domain.repositories])) {
+            final entity = pair[0] as Entity;
+            final repository = pair[1] as AbstractRepository;
+            final repositoryFile = File("${path.path}/${entity.name.toLowerSnakeCase()}.dart");
             fileSystemService.writeAsString(
-              path,
-              createRepository(pair[0] as Entity, pair[1] as AbstractRepository),
+              repositoryFile,
+              createRepository(entity, repository),
             );
           }
           break;
 
         case DomainLayer.usecase:
           for (final entity in domain.entities) {
-            fileSystemService.writeAsString(path, createUsecase(entity));
+            final usecaseFile = File("${path.path}/${entity.name.toLowerSnakeCase()}_usecase.dart");
+            fileSystemService.writeAsString(
+              usecaseFile, 
+              createUsecase(entity)
+            );
           }
           break;
+          
         case DomainLayer.factory:
           for (final pair in IterableZip([domain.entities, infrastructure.responses])) {
+            final entity = pair[0] as Entity;
+            final response = pair[1] as Response;
+            final factoryFile = File("${path.path}/${entity.name.toLowerSnakeCase()}_factory.dart");
             fileSystemService.writeAsString(
-              path,
-              createDomainFactory(pair[0] as Entity, pair[1] as Response),
+              factoryFile,
+              createDomainFactory(entity, response),
             );
           }
           break;
