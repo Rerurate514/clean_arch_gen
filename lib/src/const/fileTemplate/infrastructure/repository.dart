@@ -17,29 +17,29 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part '${repository.name.toLowerSnakeCase()}_impl.g.dart';
 
 @riverpod
-${repository.name} ${repository.name.toLowerCase()}(Ref ref) {
+${repository.name} ${repository.name.toLowerCamelCase()}(Ref ref) {
   return ${repository.name}Impl(
-    ${datasource.name.toLowerCase()}Impl: ref.watch(${datasource.name.toLowerCase()}ImplProvider), 
-    ${repository.name.toLowerCase()}FactoryImpl: ref.watch(${repository.name.toLowerCase()}FactoryImplProvider)
+    ${datasource.name.toLowerCamelCase()}Impl: ref.watch(${datasource.name.toLowerCamelCase()}ImplProvider), 
+    ${repository.name.toLowerCamelCase()}FactoryImpl: ref.watch(${repository.name.toLowerCamelCase()}FactoryImplProvider)
   );
 }
 
-${repository.name}Impl ${datasource.name.toLowerCase()}Impl (Ref ref) {
+${repository.name}Impl ${datasource.name.toLowerCamelCase()}Impl (Ref ref) {
   return ${repository.name}Impl(
-    ${datasource.name.toLowerCase()}Impl: ref.watch(${datasource.name.toLowerCase()}ImplProvider), 
-    ${repository.name.toLowerCase()}FactoryImpl: ref.watch(${repository.name.toLowerCase()}FactoryImplProvider)
+    ${datasource.name.toLowerCamelCase()}Impl: ref.watch(${datasource.name.toLowerCamelCase()}ImplProvider), 
+    ${repository.name.toLowerCamelCase()}FactoryImpl: ref.watch(${repository.name.toLowerCamelCase()}FactoryImplProvider)
   );
 }
 
 class ${repository.name}Impl implements ${repository.name} {
-  final ${datasource.name.toLowerCase()} _${datasource.name.toLowerCase()};
-  final ${repository.name}Factory _${entity.name.toLowerCase()}Factory;
+  final ${datasource.name.toLowerCamelCase()} _${datasource.name.toLowerCamelCase()};
+  final ${repository.name}Factory _${entity.name.toLowerCamelCase()}Factory;
 
   ${repository.name}Impl({
-    required ${datasource.name.toLowerCase()} ${datasource.name.toLowerCase()}Impl,
-    required ${entity.name}Factory ${entity.name.toLowerCase()}FactoryImpl
-  }) : _${datasource.name.toLowerCase()} = ${datasource.name.toLowerCase()}Impl,
-      _${entity.name.toLowerCase()}Factory = ${entity.name.toLowerCase()}FactoryImpl;
+    required ${datasource.name.toLowerCamelCase()} ${datasource.name.toLowerCamelCase()}Impl,
+    required ${entity.name}Factory ${entity.name.toLowerCamelCase()}FactoryImpl
+  }) : _${datasource.name.toLowerCamelCase()} = ${datasource.name.toLowerCamelCase()}Impl,
+      _${entity.name.toLowerCamelCase()}Factory = ${entity.name.toLowerCamelCase()}FactoryImpl;
 
   @override
   Future<${entity.name}> finlById() async {

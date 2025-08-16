@@ -14,7 +14,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part '${entity.name.toLowerSnakeCase()}_factory_impl.g.dart';
 
 @riverpod
-${entity.name}Factory ${entity.name.toLowerCase()}FactoryImpl(Ref ref) {
+${entity.name}Factory ${entity.name.toLowerCamelCase()}FactoryImpl(Ref ref) {
   return ${entity.name}FactoryImpl();
 }
 

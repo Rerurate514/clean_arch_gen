@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:clean_arch_gen/src/services/yaml/yaml_analyzer.dart';
+import 'package:clean_arch_gen/src/utils/recase.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'command_options.freezed.dart';
@@ -36,7 +37,7 @@ extension CommandOptionsEx on CommandOptions {
     String filePath = parse();
     if (filePath.isEmpty) return [];
     
-    String extension = filePath.split('.').last.toLowerCase();
+    String extension = filePath.split('.').last.toLowerCamelCase();
     switch (extension) {
       case 'yaml':
       case 'yml':

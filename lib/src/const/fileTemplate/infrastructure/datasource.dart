@@ -32,7 +32,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part '${datasource.name.toLowerSnakeCase()}_impl.g.dart';
 
 @riverpod
-${datasource.name} ${datasource.name.toLowerCase()}Impl (Ref ref) {
+${datasource.name} ${datasource.name.toLowerCamelCase()}Impl (Ref ref) {
   return ${datasource.name}Impl();
 }
 

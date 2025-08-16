@@ -4,13 +4,13 @@ import 'package:clean_arch_gen/src/utils/recase.dart';
 
 String createDomainFactory(Entity entity, Response response){
   return """
-import '../entity/${entity.name.toLowerCase()}.dart';
+import '../entity/${entity.name.toLowerCamelCase()}.dart';
 import '../infrastructure/model/${response.name.toLowerSnakeCase()}.dart';
 
 abstract class ${entity.name}Factory {
   ${entity.name} create();
 
-  ${entity.name.toLowerCase()} createFromModel(${response.name} ${entity.name.toLowerCase()});
+  ${entity.name.toLowerCamelCase()} createFromModel(${response.name} ${entity.name.toLowerCamelCase()});
 }
 
 """;

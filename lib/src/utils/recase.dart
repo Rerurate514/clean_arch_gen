@@ -6,11 +6,11 @@ extension StringCasingExtension on String {
       return '';
     }
 
-    String result = parts[0].toLowerCase();
+    String result = parts[0].toLowerCamelCase();
 
     for (int i = 1; i < parts.length; i++) {
       if (parts[i].isNotEmpty) {
-        result += parts[i][0].toUpperCase() + parts[i].substring(1).toLowerCase();
+        result += parts[i][0].toUpperCase() + parts[i].substring(1).toLowerCamelCase();
       }
     }
 
@@ -19,7 +19,7 @@ extension StringCasingExtension on String {
 
   String toLowerSnakeCase() {
     return replaceAllMapped(RegExp(r'([A-Z])'), (Match m) => '_${m.group(1)}')
-        .toLowerCase()
+        .toLowerCamelCase()
         .replaceAll(RegExp(r'[\s-]+'), '_');
   }
 }
