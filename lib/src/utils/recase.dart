@@ -17,9 +17,13 @@ extension StringCasingExtension on String {
     return result;
   }
 
-  String toLowerSnakeCase() {
-    return replaceAllMapped(RegExp(r'([A-Z])'), (Match m) => '_${m.group(1)}')
-        .toLowerCamelCase()
-        .replaceAll(RegExp(r'[\s-]+'), '_');
-  }
+String toLowerSnakeCase() {
+  return replaceAllMapped(RegExp(r'([A-Z])'), (Match m) {
+    if (m.start == 0) {
+      return m.group(1)!.toLowerCase();
+    }
+    
+    return '_${m.group(1)}'.toLowerCase();
+  }).replaceAll(RegExp(r'[\s-]+'), '_');
+}
 }
