@@ -21,11 +21,11 @@ String createDataSourceImpl(DataSource datasource){
   return """
 import 'dart:developer';
 
-import '../application/extension/github_api_exception.dart';
-import '../application/utils/dio.dart';
-import '../core/env/env.dart';
-import '../datasource/github_api_datasource.dart';
-import '../model/github_api_response.dart';
+import '../../application/extension/github_api_exception.dart';
+import '../../application/utils/dio.dart';
+import '../../core/env/env.dart';
+import '../../datasource/github_api_datasource.dart';
+import '../../model/github_api_response.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

@@ -5,10 +5,10 @@ import 'package:clean_arch_gen/src/utils/recase.dart';
 
 String createUsecase(AbstractUsecase usecase, AbstractRepository repository, Entity entity){
   return """
-import '../domain/entity/${entity.name.toLowerCamelCase()}.dart';
-import '../domain/repository/${repository.name.toLowerSnakeCase()}.dart';
-import '../domain/usecase/get_${usecase.name.toLowerSnakeCase()}.dart';
-import '../infrastructure/repository/${repository.name.toLowerSnakeCase()}_impl.dart';
+import '../../domain/entity/${entity.name.toLowerCamelCase()}.dart';
+import '../../domain/repository/${repository.name.toLowerSnakeCase()}.dart';
+import '../../domain/usecase/get_${usecase.name.toLowerSnakeCase()}.dart';
+import '../../infrastructure/repository/${repository.name.toLowerSnakeCase()}_impl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

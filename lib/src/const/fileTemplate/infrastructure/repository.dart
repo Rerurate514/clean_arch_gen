@@ -5,9 +5,9 @@ import 'package:clean_arch_gen/src/utils/recase.dart';
 
 String createRepository(Entity entity, Repository repository, DataSource datasource){
   return """
-import '../domain/entity/${entity.name.toLowerSnakeCase()}.dart';
-import '../domain/factory/${entity.name.toLowerSnakeCase()}_factory.dart';
-import '../domain/repository/${repository.name.toLowerSnakeCase()}.dart';
+import '../../domain/entity/${entity.name.toLowerSnakeCase()}.dart';
+import '../../domain/factory/${entity.name.toLowerSnakeCase()}_factory.dart';
+import '../../domain/repository/${repository.name.toLowerSnakeCase()}.dart';
 import '../datasource/${entity.name.toLowerSnakeCase()}.dart';
 import '../datasource/${entity.name.toLowerSnakeCase()}_impl.dart';
 import '../factory/${entity.name.toLowerSnakeCase()}_factory_impl.dart';
