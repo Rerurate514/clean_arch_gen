@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:convert';
 import 'package:clean_arch_gen/src/services/yaml/yaml_analyzer.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
