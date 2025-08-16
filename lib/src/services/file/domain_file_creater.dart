@@ -32,7 +32,7 @@ class DomainFileCreater {
           }
           break;
 
-        case DomainLayer.repositoy:
+        case DomainLayer.repository:
           for (final pair in IterableZip([domain.entities, domain.repositories])) {
             fileSystemService.writeAsString(
               path,

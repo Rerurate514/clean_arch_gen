@@ -1,6 +1,6 @@
 enum DomainLayer {
   entity,
   factory,
-  repositoy,
+  repository,
   usecase
 }

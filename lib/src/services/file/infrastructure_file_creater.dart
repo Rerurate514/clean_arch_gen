@@ -49,7 +49,7 @@ class InfrastructureFileCreater {
             fileSystemService.writeAsString(path, createModel(pair[0]));
           }
           break;
-        case InfrastructureLayer.repositoy:
+        case InfrastructureLayer.repository:
           for (final pair in IterableZip([domain.entities, infra.repositories, infra.dataSources])) {
             fileSystemService.writeAsString(
               path,
