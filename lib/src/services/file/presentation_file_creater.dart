@@ -20,7 +20,7 @@ class PresentationFileCreater {
   PresentationFileCreater(this.fileSystemService);
 
   void create(File yaml, Presentation presentation, Infrastructure infra, Domain domain) {
-    final layerDir = "${yaml.parent}/${Layers.presentation}/";
+    final layerDir = "${yaml.parent.path}/${Layers.presentation.name}";
 
     for (final subDir in PresentationLayer.values) {
       final path = File("$layerDir/${subDir.name}");

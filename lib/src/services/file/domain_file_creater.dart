@@ -21,7 +21,7 @@ class DomainFileCreater {
   DomainFileCreater(this.fileSystemService);
 
   void create(File yaml, Domain domain, Infrastructure infrastructure) {
-    final layerDir = "${yaml.parent}/${Layers.domain}/";
+    final layerDir = "${yaml.parent.path}/${Layers.domain.name}";
 
     for (final subDir in DomainLayer.values) {
       final path = File("$layerDir/${subDir.name}");

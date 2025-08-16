@@ -18,7 +18,7 @@ class ApplicationFileCreater {
   ApplicationFileCreater(this.fileSystemService);
 
   void create(File yaml, Domain domain) {
-    final layerDir = "${yaml.parent}/${Layers.application}/";
+    final layerDir = "${yaml.parent.path}/${Layers.application.name}";
 
     for(final subDir in ApplicationLayer.values){
       final path = File("$layerDir/${subDir.name}");

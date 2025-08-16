@@ -22,7 +22,7 @@ class InfrastructureFileCreater {
   InfrastructureFileCreater(this.fileSystemService);
 
   void create(File yaml, Infrastructure infra, Domain domain) {
-    final layerDir = "${yaml.parent}/${Layers.infrastructure}/";
+    final layerDir = "${yaml.parent.path}/${Layers.infrastructure.name}";
 
     for (final subDir in InfrastructureLayer.values) {
       final path = File("$layerDir/${subDir.name}");
