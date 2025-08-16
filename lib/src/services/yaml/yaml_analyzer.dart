@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:clean_arch_gen/src/services/file/application_file_creater.dart';
 import 'package:clean_arch_gen/src/services/file/directory_creater.dart';
 import 'package:clean_arch_gen/src/services/file/domain_file_creater.dart';
+import 'package:clean_arch_gen/src/services/file/file_system_service.dart';
 import 'package:clean_arch_gen/src/services/file/infrastructure_file_creater.dart';
 import 'package:clean_arch_gen/src/services/file/presentation_file_creater.dart';
 import 'package:clean_arch_gen/src/services/yaml/domain_factory.dart';
@@ -26,15 +27,19 @@ class YamlAnalyzer {
     final infrastructure = infrastructureFactory.createInfrastructure(yaml);
     final presentation = presentationFactory.createPresentation(yaml);
 
+    final FileSystemService fileSystemService = RealFileSystemService();
+
     final DirectoryCreater directoryCreater = DirectoryCreater(
-      fileSystemService: RealFileSystemService(), 
+      fileSystemService: fileSystemService, 
       yaml: file
     );
 
-    final applicationFileCreater = ApplicationFileCreater(directoryCreater);
-    final domainFileCreater = DomainFileCreater(directoryCreater);
-    final infrastructureFileCreater = InfrastructureFileCreater(directoryCreater);
-    final presentationFileCreater = PresentationFileCreater(directoryCreater);
+    directoryCreater.createProject();
+
+    final applicationFileCreater = ApplicationFileCreater(fileSystemService);
+    final domainFileCreater = DomainFileCreater(fileSystemService);
+    final infrastructureFileCreater = InfrastructureFileCreater(fileSystemService);
+    final presentationFileCreater = PresentationFileCreater(fileSystemService);
 
     applicationFileCreater.create(file, domain);
     domainFileCreater.create(file, domain, infrastructure);
