@@ -36,6 +36,7 @@ class DirectoryCreater {
       final path = '${makePos.path}/$dir';
       if (await fileSystemService.directoryExists(path)) continue;
       await fileSystemService.createDirectory(path, recursive: true);
+      print("created layer: $dir");
     }
 
     for (final layer in Layers.values) {
@@ -48,6 +49,7 @@ class DirectoryCreater {
       final path = '${makePos.path}/${layer.name}/$dir';
       if (await fileSystemService.directoryExists(path)) continue;
       await fileSystemService.createDirectory(path, recursive: true);
+      print("created dir in ${layer.name} layer: $dir");
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:clean_arch_gen/src/services/yaml/yaml_analyzer.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'command_options.freezed.dart';
@@ -60,22 +61,8 @@ extension CommandOptionsEx on CommandOptions {
     if (command.isEmpty) {
       throw Exception('実行コマンドを生成できません');
     }
-    // print(file.parent.path);
-    // Process process = await Process.start(
-    //   command[0],
-    //   command.sublist(1),
-    //   workingDirectory: file.parent.path,
-    // );
-    
-    // process.stdout.transform(utf8.decoder).listen(stdout.write);
-    // process.stderr.transform(utf8.decoder).listen(stderr.write);
-    
-    // int exitCode = await process.exitCode;
-    // if (exitCode != 0) {
-    //   exit(exitCode);
-    // }
 
-    String fileContent = await file.readAsString();
-    
+    final YamlAnalyzer yamlAnalyzer = YamlAnalyzer();
+    yamlAnalyzer.analyze(file);
   }
 }
