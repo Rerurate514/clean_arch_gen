@@ -38,15 +38,9 @@ extension CommandOptionsEx on CommandOptions {
     
     String extension = filePath.split('.').last.toLowerCase();
     switch (extension) {
-      case 'dart': return ['dart', 'run', filePath];
-      case 'py': return ['python', filePath];
-      case 'js': return ['node', filePath];
-      case 'sh': return ['sh', filePath];
-      case 'bat': return ['cmd', '/c', filePath];
-      case 'ps1': return ['powershell', '-File', filePath];
-      case 'rb': return ['ruby', filePath];
-      case 'php': return ['php', filePath];
-      case 'go': return ['go', 'run', filePath];
+      case 'yaml':
+      case 'yml':
+        return ['type', filePath];
       default: return Platform.isWindows ? [filePath] : ['./${filePath.split('/').last}'];
     }
   }
