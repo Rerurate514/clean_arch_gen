@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:clean_arch_gen/src/const/fileTemplate/domain/factory.dart';
 import 'package:clean_arch_gen/src/const/fileTemplate/domain/usecase.dart';
 import 'package:clean_arch_gen/src/models/domain/abstract_repository.dart';
+import 'package:clean_arch_gen/src/models/domain/abstract_usecase.dart';
 import 'package:clean_arch_gen/src/models/domain/entity.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/infrastructure.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/response.dart';
@@ -41,7 +42,7 @@ class DomainFileCreater {
           for (final pair in IterableZip([domain.entities, domain.repositories])) {
             final entity = pair[0] as Entity;
             final repository = pair[1] as AbstractRepository;
-            final repositoryFile = File("${path.path}/${entity.name.toLowerSnakeCase()}.dart");
+            final repositoryFile = File("${path.path}/${repository.name.toLowerSnakeCase()}.dart");
             fileSystemService.writeAsString(
               repositoryFile,
               createRepository(entity, repository),
@@ -50,11 +51,13 @@ class DomainFileCreater {
           break;
 
         case DomainLayer.usecase:
-          for (final entity in domain.entities) {
-            final usecaseFile = File("${path.path}/${entity.name.toLowerSnakeCase()}_usecase.dart");
+          for (final pair in IterableZip([domain.entities, domain.usecases])) {
+            final entity = pair[0] as Entity;
+            final usecase = pair[1] as AbstractUsecase;
+            final usecaseFile = File("${path.path}/get_${usecase.name.toLowerSnakeCase()}.dart");
             fileSystemService.writeAsString(
               usecaseFile, 
-              createUsecase(entity)
+              createUsecase(entity, usecase)
             );
           }
           break;

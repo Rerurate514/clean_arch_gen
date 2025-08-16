@@ -12,12 +12,12 @@ import '../../infrastructure/repository/${repository.name.toLowerSnakeCase()}_im
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'get_${usecase.name.toLowerCamelCase()}_impl.g.dart';
+part 'get_${usecase.name.toLowerSnakeCase()}_impl.g.dart';
 
 @riverpod
 Get${usecase.name}Impl get${usecase.name}Impl(Ref ref){
   return Get${usecase.name}Impl(
-    ${repository.name.toLowerCamelCase()}: ref.watch(${repository.name.toLowerCamelCase()}Provider)
+    ${repository.name.toLowerCamelCase()}: ref.watch(${repository.name.toLowerCamelCase()}ImplProvider)
   );
 }
 
@@ -25,7 +25,7 @@ class Get${usecase.name}Impl implements Get${usecase.name} {
   final ${repository.name} _${repository.name.toLowerCamelCase()};
 
   Get${usecase.name}Impl({
-    required ${repository.name.toLowerCamelCase()} ${repository.name.toLowerCamelCase()}
+    required ${repository.name} ${repository.name.toLowerCamelCase()}
   }): _${repository.name.toLowerCamelCase()} = ${repository.name.toLowerCamelCase()};
   
   @override

@@ -1,6 +1,6 @@
 extension StringCasingExtension on String {
   String toLowerCamelCase() {
-    List<String> parts = split(RegExp(r'[-_\s]'));
+    List<String> parts = split(RegExp(r'(?<=[a-z])(?=[A-Z])|[-_\s]'));
 
     if (parts.isEmpty) {
       return '';
@@ -17,13 +17,13 @@ extension StringCasingExtension on String {
     return result;
   }
 
-String toLowerSnakeCase() {
-  return replaceAllMapped(RegExp(r'([A-Z])'), (Match m) {
-    if (m.start == 0) {
-      return m.group(1)!.toLowerCase();
-    }
-    
-    return '_${m.group(1)}'.toLowerCase();
-  }).replaceAll(RegExp(r'[\s-]+'), '_');
-}
+  String toLowerSnakeCase() {
+    return replaceAllMapped(RegExp(r'([A-Z])'), (Match m) {
+      if (m.start == 0) {
+        return m.group(1)!.toLowerCase();
+      }
+      
+      return '_${m.group(1)}'.toLowerCase();
+    }).replaceAll(RegExp(r'[\s-]+'), '_');
+  }
 }

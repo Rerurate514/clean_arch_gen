@@ -32,16 +32,16 @@ class InfrastructureFileCreater {
           for (final pair in IterableZip([infra.responses, infra.dataSources])) {
             final response = pair[0] as Response;
             final dataSource = pair[1] as DataSource;
-            final dataSourceFile = File("${path.path}/${response.name.toLowerSnakeCase()}_datasource.dart");
+            final dataSourceFile = File("${path.path}/${dataSource.name.toLowerSnakeCase()}.dart");
             fileSystemService.writeAsString(
               dataSourceFile,
               createDataSource(response, dataSource),
             );
 
-            final dataSourceImplFile = File("${path.path}/${response.name.toLowerSnakeCase()}_datasource_impl.dart");
+            final dataSourceImplFile = File("${path.path}/${dataSource.name.toLowerSnakeCase()}_impl.dart");
             fileSystemService.writeAsString(
               dataSourceImplFile,
-              createDataSourceImpl(dataSource),
+              createDataSourceImpl(response, dataSource),
             );
           }
           break;
@@ -50,7 +50,7 @@ class InfrastructureFileCreater {
             final entity = pair[0] as Entity;
             final repository = pair[1] as Repository;
             final response = pair[2] as Response;
-            final factoryFile = File("${path.path}/${entity.name.toLowerSnakeCase()}_factory.dart");
+            final factoryFile = File("${path.path}/${entity.name.toLowerSnakeCase()}_factory_impl.dart");
             fileSystemService.writeAsString(
               factoryFile,
               createInfrastructureFactory(entity, repository, response),
@@ -71,7 +71,7 @@ class InfrastructureFileCreater {
             final entity = pair[0] as Entity;
             final repository = pair[1] as Repository;
             final dataSource = pair[2] as DataSource;
-            final repositoryFile = File("${path.path}/${entity.name.toLowerSnakeCase()}.dart");
+            final repositoryFile = File("${path.path}/${repository.name.toLowerSnakeCase()}_impl.dart");
             fileSystemService.writeAsString(
               repositoryFile,
               createRepository(entity, repository, dataSource),

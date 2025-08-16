@@ -4,12 +4,12 @@ import 'package:clean_arch_gen/src/utils/recase.dart';
 
 String createDataSource(Response response, DataSource datasource){
   return """
-import '../model/${response.name.toLowerSnakeCase()}.dart';
+import '../model/${response.name.toLowerSnakeCase()}_response.dart';
 
 abstract class ${datasource.name} {
-  Future<${response.name}> findById();
+  Future<${response.name}Response> findById();
 
-  Future<List<${response.name}> findAll();
+  Future<List<${response.name}Response>> findAll();
   
   void dispose();
 }
@@ -17,15 +17,10 @@ abstract class ${datasource.name} {
 """;
 }
 
-String createDataSourceImpl(DataSource datasource){
+String createDataSourceImpl(Response response, DataSource datasource){
   return """
-import 'dart:developer';
-
-import '../../application/extension/github_api_exception.dart';
-import '../../application/utils/dio.dart';
-import '../../core/env/env.dart';
-import '../../datasource/github_api_datasource.dart';
-import '../../model/github_api_response.dart';
+import '../model/${response.name.toLowerSnakeCase()}_response.dart';
+import './${datasource.name.toLowerSnakeCase()}.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -40,12 +35,12 @@ class ${datasource.name}Impl implements ${datasource.name} {
   ${datasource.name}Impl();
 
   @override
-  Future<GithubApiResponse> findbyId() async {
+  Future<${response.name}Response> findById() async {
     
   }
 
   @override
-  Future<List<GithubApiResponse>> findAll() async {
+  Future<List<${response.name}Response>> findAll() async {
     
   }
 

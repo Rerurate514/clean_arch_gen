@@ -31,7 +31,7 @@ class PresentationFileCreater {
             final repository = pair[0] as Repository;
             final usecase = pair[1] as AbstractUsecase;
             final notifier = pair[2] as Notifier;
-            final notifierFile = File("${path.path}/${usecase.name.toLowerSnakeCase()}_notifier.dart");
+            final notifierFile = File("${path.path}/${notifier.name.toLowerSnakeCase()}_notifier.dart");
             fileSystemService.writeAsString(
               notifierFile,
               createNotifier(repository, usecase, notifier),

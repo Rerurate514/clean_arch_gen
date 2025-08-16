@@ -7,7 +7,7 @@ String createRepository(Entity entity, AbstractRepository repository) {
 import '../entity/${entity.name.toLowerCamelCase()}.dart';
 
 abstract class ${repository.name} {
-  Future<${entity.name}> finlById();
+  Future<${entity.name}> findById();
   Future<List<${entity.name}>> findAll();
   void dispose();
 }

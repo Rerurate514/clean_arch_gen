@@ -29,7 +29,7 @@ class ApplicationFileCreater {
           break;
         case ApplicationLayer.usecase:
           for (final pair in IterableZip([domain.usecases, domain.repositories, domain.entities, ])) {
-            final usecaseFile = File("${path.path}/get_${(pair[0] as AbstractUsecase).name.toLowerSnakeCase()}_usecase.dart");
+            final usecaseFile = File("${path.path}/get_${(pair[0] as AbstractUsecase).name.toLowerSnakeCase()}_impl.dart");
             fileSystemService.writeAsString(
               usecaseFile, 
               createUsecase(pair[0] as AbstractUsecase, pair[1] as AbstractRepository, pair[2] as Entity)
