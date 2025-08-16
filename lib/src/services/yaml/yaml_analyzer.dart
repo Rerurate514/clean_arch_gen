@@ -34,7 +34,7 @@ class YamlAnalyzer {
       yaml: file
     );
 
-    directoryCreater.createProject();
+    await directoryCreater.createProject();
 
     final applicationFileCreater = ApplicationFileCreater(fileSystemService);
     final domainFileCreater = DomainFileCreater(fileSystemService);
