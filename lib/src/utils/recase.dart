@@ -6,11 +6,11 @@ extension StringCasingExtension on String {
       return '';
     }
 
-    String result = parts[0].toLowerCamelCase();
+    String result = parts[0].toLowerCase();
 
     for (int i = 1; i < parts.length; i++) {
       if (parts[i].isNotEmpty) {
-        result += parts[i][0].toUpperCase() + parts[i].substring(1).toLowerCamelCase();
+        result += parts[i][0].toUpperCase() + parts[i].substring(1).toLowerCase();
       }
     }
 
