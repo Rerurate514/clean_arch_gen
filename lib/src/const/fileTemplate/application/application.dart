@@ -1,0 +1,4 @@
+enum ApplicationLayer {
+  extension,
+  usecase,
+}

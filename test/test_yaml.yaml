@@ -1,0 +1,56 @@
+# user_authentication.yaml
+
+feature_name: UserAuthentication
+
+# 1. Domain層: ビジネスロジックのコア
+domain:
+  entities: # 複数形なのでリストにする
+    - User:
+        fields:
+          id: String
+          name: String
+  usecases: # 複数形なのでリストにする
+    - LoginUseCase:
+        methods:
+          - login:
+              returns: Future<User>
+              params:
+                - username: String
+                - password: String
+  repositories: # 複数形なのでリストにする
+    - UserRepository:
+        methods:
+          - login:
+              returns: Future<User>
+              params:
+                - username: String
+                - password: String
+
+# 2. Application層: ドメイン層のユースケース実装
+application:
+  usecases:
+    - LoginUseCaseImpl:
+        implements: LoginUseCase
+        dependencies:
+        - UserRepository
+
+# 3. Infrastructure層: 外部リソースとのやり取り
+infrastructure:
+  repositories:
+    - User:
+        implements: UserRepository
+        dependencies:
+          - AuthDataSource
+  datasources:
+    - AuthDataSource
+  responses:
+    - AuthData
+    - UserData
+
+# 4. Presentation層: UIと状態管理
+presentation:
+  pages:
+    - home
+    - settings
+  notifiers:
+    - LoginNotifier
