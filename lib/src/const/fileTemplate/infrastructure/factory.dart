@@ -4,6 +4,10 @@ import 'package:clean_arch_gen/src/models/infrastructure/response.dart';
 import 'package:clean_arch_gen/src/utils/recase.dart';
 
 String createInfrastructureFactory(Entity entity, AbstractRepository repository, Response response){
+  final fields = entity.classFields
+    .map((classField) => "required ${classField.type} ${classField.name},")
+    .join('\n    ');
+  
   return """
 import '../../domain/entity/${entity.name.toLowerSnakeCase()}.dart';
 import '../../domain/factory/${entity.name.toLowerSnakeCase()}_factory.dart';
@@ -20,7 +24,9 @@ ${entity.name}Factory ${entity.name.toLowerCamelCase()}FactoryImpl(Ref ref) {
 
 class ${entity.name}FactoryImpl implements ${entity.name}Factory {
   @override
-  ${entity.name} create() {
+  ${entity.name} create({
+    $fields
+  }) {
     return ${entity.name}();
   }
 
