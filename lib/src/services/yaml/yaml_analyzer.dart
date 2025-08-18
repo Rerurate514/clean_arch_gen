@@ -44,6 +44,6 @@ class YamlAnalyzer {
     applicationFileCreater.create(file, domain);
     domainFileCreater.create(file, domain, infrastructure);
     infrastructureFileCreater.create(file, infrastructure, domain);
-    presentationFileCreater.create(file, presentation, infrastructure, domain);
+    presentationFileCreater.create(file, presentation, domain);
   }
 }

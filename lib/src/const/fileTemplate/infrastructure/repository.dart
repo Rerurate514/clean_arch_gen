@@ -1,9 +1,23 @@
+import 'package:clean_arch_gen/src/models/domain/abstract_repository.dart';
 import 'package:clean_arch_gen/src/models/domain/entity.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/datasource.dart';
-import 'package:clean_arch_gen/src/models/infrastructure/repository.dart';
 import 'package:clean_arch_gen/src/utils/recase.dart';
 
-String createRepository(Entity entity, Repository repository, DataSource datasource){
+String createRepository(Entity entity, AbstractRepository repository, DataSource datasource){
+  final methods = repository.methods
+    .map((method) {
+      final params = method.params
+          .map((param) => "${param.type} ${param.name}")
+          .join(', ');
+      return """
+  @override
+  ${method.returns} ${method.name}($params)${method.isAsync ? " async" : ""} {
+    
+  }
+""";
+    })
+    .join('\n\n');
+  
   return """
 import '../../domain/entity/${entity.name.toLowerSnakeCase()}.dart';
 import '../../domain/factory/${entity.name.toLowerSnakeCase()}_factory.dart';
@@ -34,20 +48,7 @@ class ${repository.name}Impl implements ${repository.name} {
   }) : _${datasource.name.toLowerCamelCase()} = ${datasource.name.toLowerCamelCase()},
       _${entity.name.toLowerCamelCase()}Factory = ${entity.name.toLowerCamelCase()}Factory;
 
-  @override
-  Future<${entity.name}> findById() async {
-    final response = await _${datasource.name.toLowerCamelCase()}.findById();
-    return _${entity.name.toLowerCamelCase()}Factory.createFromModel(response);
-  }
-
-  @override
-  Future<List<${entity.name}>> findAll() async {
-    final response = await _${datasource.name.toLowerCamelCase()}.findAll();
-    return response.map((${entity.name.toLowerCamelCase()}) => 
-      _${entity.name.toLowerCamelCase()}Factory.createFromModel(${entity.name.toLowerCamelCase()})
-    ).toList();
-  }
-
+${methods}
   @override
   void dispose() { }
 }

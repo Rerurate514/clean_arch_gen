@@ -7,10 +7,6 @@ String createDataSource(Response response, DataSource datasource){
 import '../model/${response.name.toLowerSnakeCase()}.dart';
 
 abstract class ${datasource.name} {
-  Future<${response.name}> findById();
-
-  Future<List<${response.name}>> findAll();
-  
   void dispose();
 }
 
@@ -33,16 +29,6 @@ ${datasource.name} ${datasource.name.toLowerCamelCase()}Impl (Ref ref) {
 
 class ${datasource.name}Impl implements ${datasource.name} {
   ${datasource.name}Impl();
-
-  @override
-  Future<${response.name}> findById() async {
-    
-  }
-
-  @override
-  Future<List<${response.name}>> findAll() async {
-    
-  }
 
   @override
   void dispose() {

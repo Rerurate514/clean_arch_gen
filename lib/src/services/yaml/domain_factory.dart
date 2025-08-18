@@ -39,7 +39,7 @@ class DomainFactory {
         .toList();
   }
 
-  List<AbstractUsecase> _createUseCases(YamlMap yaml) {
+  List<AbstractUsecase> _createUseCases(YamlMap yaml) {print(yaml[Paths.domain.path][Paths.domainUseCases.path]);
     final usecaseYaml = yaml[Paths.domain.path][Paths.domainUseCases.path] as YamlList;
     return usecaseYaml
         .cast<YamlMap>()

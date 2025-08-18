@@ -1,9 +1,9 @@
+import 'package:clean_arch_gen/src/models/domain/abstract_repository.dart';
 import 'package:clean_arch_gen/src/models/domain/entity.dart';
-import 'package:clean_arch_gen/src/models/infrastructure/repository.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/response.dart';
 import 'package:clean_arch_gen/src/utils/recase.dart';
 
-String createInfrastructureFactory(Entity entity, Repository repository, Response response){
+String createInfrastructureFactory(Entity entity, AbstractRepository repository, Response response){
   return """
 import '../../domain/entity/${entity.name.toLowerSnakeCase()}.dart';
 import '../../domain/factory/${entity.name.toLowerSnakeCase()}_factory.dart';
