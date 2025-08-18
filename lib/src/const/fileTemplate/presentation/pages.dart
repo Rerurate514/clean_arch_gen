@@ -11,7 +11,8 @@ class ${page.name}Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SafeArea(
-        child: Container(),
+        child: Placeholder()
+      )
     );
   }
 }

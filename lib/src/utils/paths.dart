@@ -11,7 +11,7 @@ enum Paths {
   infrastructureRepositories('repositories'),
   infrastructureDataSources('datasources'),
   presentation('presentation'),
-  presentationPage('page'),
+  presentationPages('pages'),
   presentationNotifiers('notifiers'),
   presentationNotifierStates('states'),
   fields('fields'),
