@@ -18,7 +18,7 @@ class PresentationFactory {
       return [];
     }
     
-    final pagesYaml = presentationYaml[Paths.presentationPages.path] as YamlList;print("@@@@@@@@@@@@@]: $pagesYaml");
+    final pagesYaml = presentationYaml[Paths.presentationPages.path] as YamlList;
     return pagesYaml
         .cast<String>()
         .map((pageName) => Page(name: pageName))
