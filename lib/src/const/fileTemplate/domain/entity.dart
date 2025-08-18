@@ -10,7 +10,9 @@ part '${entity.name.toLowerCamelCase()}.g.dart';
 
 @freezed
 sealed class ${entity.name} with _\$${entity.name} {
-  const factory ${entity.name}() = _${entity.name};
+  const factory ${entity.name}({
+    
+  }) = _${entity.name};
 
   factory ${entity.name}.fromJson(Map<String, dynamic> json) => _\$${entity.name}FromJson(json);
 }
