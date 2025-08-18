@@ -36,12 +36,16 @@ class ${repository.name}Impl implements ${repository.name} {
 
   @override
   Future<${entity.name}> findById() async {
-
+    final response = await _${datasource.name.toLowerCamelCase()}.findById();
+    return _${entity.name.toLowerCamelCase()}Factory.createFromModel(response);
   }
 
   @override
   Future<List<${entity.name}>> findAll() async {
-    
+    final response = await _${datasource.name.toLowerCamelCase()}.findAll();
+    return response.map((${entity.name.toLowerCamelCase()}) => 
+      _${entity.name.toLowerCamelCase()}Factory.createFromModel(${entity.name.toLowerCamelCase()})
+    ).toList();
   }
 
   @override
