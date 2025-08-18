@@ -50,9 +50,17 @@ class DomainFactory {
   Iterable<AbstractUsecase> _extractUseCasesFromYaml(YamlMap usecaseYaml) {
     return usecaseYaml.keys.map((usecaseName) {
       final usecaseData = usecaseYaml[usecaseName];
-      final methods = _createMethods(usecaseData[Paths.methods.path]);
-      return AbstractUsecase(name: usecaseName, methods: methods);
+      final method = _createMethodsForUsecase(usecaseData[Paths.method.path]);
+      return AbstractUsecase(name: usecaseName, method: method);
     });
+  }
+
+  Method _createMethodsForUsecase(YamlMap methodYaml) {
+    final methodName = "execute";
+    final returns = methodYaml[Paths.returns.path] as String;
+    final params = _createParams(methodYaml[Paths.params.path] as YamlList);
+    final isAsync = methodYaml[Paths.isAsync.path] ?? false;
+    return Method(name: methodName, returns: returns, params: params, isAsync:  isAsync);
   }
 
   List<AbstractRepository> _createRepositories(YamlMap yaml) {
@@ -83,7 +91,8 @@ class DomainFactory {
       final methodData = methodsMap[methodName];
       final returns = methodData[Paths.returns.path] as String;
       final params = _createParams(methodData[Paths.params.path]);
-      return Method(name: methodName, returns: returns, params: params);
+      final isAsync = methodData[Paths.isAsync.path] ?? false;
+      return Method(name: methodName, returns: returns, params: params, isAsync: isAsync);
     });
   }
 

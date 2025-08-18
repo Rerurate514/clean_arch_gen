@@ -28,14 +28,8 @@ class Get${usecase.name}Impl implements Get${usecase.name} {
     required ${repository.name} ${repository.name.toLowerCamelCase()}
   }): _${repository.name.toLowerCamelCase()} = ${repository.name.toLowerCamelCase()};
   
-  @override
-  Future<${entity.name}> findById() async  {
-    return await _${repository.name.toLowerCamelCase()}.findById();
-  }
-
-  @override
-  Future<List<${entity.name}>> findAll() async {
-    return await _${repository.name.toLowerCamelCase()}.findAll();
+  ${usecase.method.returns} ${usecase.method.name}(${usecase.method.params.map((param) => "${param.type} ${param.name}") .join(', ')})${" ${usecase.method.isAsync ? "async " : ""}"}{
+    
   }
 }
 

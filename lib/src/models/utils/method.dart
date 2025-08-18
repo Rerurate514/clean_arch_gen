@@ -9,7 +9,8 @@ sealed class Method with _$Method {
   const factory Method({
     required String name,
     required String returns,
-    required List<Params> params
+    required List<Params> params,
+    required bool isAsync,
   }) = _Method;
 
   factory Method.fromJson(Map<String, dynamic> json) => _$MethodFromJson(json);

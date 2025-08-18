@@ -8,7 +8,7 @@ part 'abstract_usecase.g.dart';
 sealed class AbstractUsecase with _$AbstractUsecase {
   const factory AbstractUsecase({
     required String name,
-    required List<Method> methods
+    required Method method
   }) = _AbstractUsecase;
 
   factory AbstractUsecase.fromJson(Map<String, dynamic> json) => _$AbstractUsecaseFromJson(json);
