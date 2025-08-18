@@ -3,10 +3,22 @@ import 'package:clean_arch_gen/src/models/infrastructure/response.dart';
 import 'package:clean_arch_gen/src/utils/recase.dart';
 
 String createDataSource(Response response, DataSource datasource){
+    final methods = datasource.methods
+    .map((method) {
+      final params = method.params
+          .map((param) => "${param.type} ${param.name}")
+          .join(', ');
+      return """
+  ${method.returns} ${method.name}($params);
+""";
+    })
+    .join('');
+
   return """
 import '../model/${response.name.toLowerSnakeCase()}.dart';
 
 abstract class ${datasource.name} {
+${methods}
   void dispose();
 }
 
@@ -14,6 +26,20 @@ abstract class ${datasource.name} {
 }
 
 String createDataSourceImpl(Response response, DataSource datasource){
+  final methods = datasource.methods
+    .map((method) {
+      final params = method.params
+          .map((param) => "${param.type} ${param.name}")
+          .join(', ');
+      return """
+  @override
+  ${method.returns} ${method.name}($params)${method.isAsync ? " async" : ""} {
+    
+  }
+""";
+    })
+    .join('\n\n');
+
   return """
 import '../model/${response.name.toLowerSnakeCase()}.dart';
 import './${datasource.name.toLowerSnakeCase()}.dart';
@@ -30,6 +56,7 @@ ${datasource.name} ${datasource.name.toLowerCamelCase()}Impl (Ref ref) {
 class ${datasource.name}Impl implements ${datasource.name} {
   ${datasource.name}Impl();
 
+${methods}
   @override
   void dispose() {
 
