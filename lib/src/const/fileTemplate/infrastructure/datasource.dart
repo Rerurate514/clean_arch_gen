@@ -4,12 +4,12 @@ import 'package:clean_arch_gen/src/utils/recase.dart';
 
 String createDataSource(Response response, DataSource datasource){
   return """
-import '../model/${response.name.toLowerSnakeCase()}_response.dart';
+import '../model/${response.name.toLowerSnakeCase()}.dart';
 
 abstract class ${datasource.name} {
-  Future<${response.name}Response> findById();
+  Future<${response.name}> findById();
 
-  Future<List<${response.name}Response>> findAll();
+  Future<List<${response.name}>> findAll();
   
   void dispose();
 }
@@ -19,7 +19,7 @@ abstract class ${datasource.name} {
 
 String createDataSourceImpl(Response response, DataSource datasource){
   return """
-import '../model/${response.name.toLowerSnakeCase()}_response.dart';
+import '../model/${response.name.toLowerSnakeCase()}.dart';
 import './${datasource.name.toLowerSnakeCase()}.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -35,12 +35,12 @@ class ${datasource.name}Impl implements ${datasource.name} {
   ${datasource.name}Impl();
 
   @override
-  Future<${response.name}Response> findById() async {
+  Future<${response.name}> findById() async {
     
   }
 
   @override
-  Future<List<${response.name}Response>> findAll() async {
+  Future<List<${response.name}>> findAll() async {
     
   }
 

@@ -59,7 +59,7 @@ class InfrastructureFileCreater {
           break;
         case InfrastructureLayer.model:
           for (final response in infra.responses) {
-            final modelFile = File("${path.path}/${response.name.toLowerSnakeCase()}_response.dart");
+            final modelFile = File("${path.path}/${response.name.toLowerSnakeCase()}.dart");
             fileSystemService.writeAsString(
               modelFile, 
               createModel(response)

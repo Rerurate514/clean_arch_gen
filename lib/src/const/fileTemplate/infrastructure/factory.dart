@@ -7,7 +7,7 @@ String createInfrastructureFactory(Entity entity, Repository repository, Respons
   return """
 import '../../domain/entity/${entity.name.toLowerSnakeCase()}.dart';
 import '../../domain/factory/${entity.name.toLowerSnakeCase()}_factory.dart';
-import '../model/${response.name.toLowerSnakeCase()}_response.dart';
+import '../model/${response.name.toLowerSnakeCase()}.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -25,7 +25,7 @@ class ${entity.name}FactoryImpl implements ${entity.name}Factory {
   }
 
   @override
-  ${entity.name} createFromModel(${response.name}Response response) {
+  ${entity.name} createFromModel(${response.name} response) {
     return ${entity.name}();
   }
 }
