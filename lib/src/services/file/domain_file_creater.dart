@@ -54,7 +54,7 @@ class DomainFileCreater {
           for (final pair in IterableZip([domain.entities, domain.usecases])) {
             final entity = pair[0] as Entity;
             final usecase = pair[1] as AbstractUsecase;
-            final usecaseFile = File("${path.path}/get_${usecase.name.toLowerSnakeCase()}.dart");
+            final usecaseFile = File("${path.path}/${usecase.name.toLowerSnakeCase()}.dart");
             fileSystemService.writeAsString(
               usecaseFile, 
               createUsecase(entity, usecase)

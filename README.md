@@ -113,7 +113,7 @@ lib/
         │   ├── extensions/
         │   ├── utils/
         │   └── usecase/
-        │       └── get_authention_usecase_impl.dart
+        │       └── authention_usecase_impl.dart
         ├── core/
         ├── domain/
         │   ├── entity/
@@ -121,7 +121,7 @@ lib/
         │   ├── factory/
         │   │   └── user_factory.dart
         │   ├── usecases/
-        │   │   └── get_authenticate_usecase.dart
+        │   │   └── authenticate_usecase.dart
         │   └── repositories/
         │       └── user_repository.dart
         ├── infrastructure/

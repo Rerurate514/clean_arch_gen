@@ -5,7 +5,7 @@ import 'package:clean_arch_gen/src/utils/recase.dart';
 
 String createNotifier(AbstractRepository repository, AbstractUsecase usecase, Notifier notifier){
   return """
-import '../../application/usecase/get_${usecase.name.toLowerSnakeCase()}_impl.dart';
+import '../../application/usecase/${usecase.name.toLowerSnakeCase()}_impl.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part '${notifier.name.toLowerSnakeCase()}_notifier.g.dart';
