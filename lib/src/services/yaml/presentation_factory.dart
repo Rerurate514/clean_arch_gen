@@ -14,15 +14,16 @@ class PresentationFactory {
 
   List<Page> _createPages(YamlMap yaml) {
     final presentationYaml = yaml[Paths.presentation.path];
-    if (presentationYaml == null || presentationYaml[Paths.presentation.path] == null) {
+    if (presentationYaml == null || presentationYaml[Paths.presentationPages.path] == null) {
       return [];
     }
     
-    final pagesYaml = presentationYaml[Paths.presentation.path] as YamlList;
+    final pagesYaml = presentationYaml[Paths.presentationPages.path] as YamlList;
     return pagesYaml
         .cast<String>()
         .map((pageName) => Page(name: pageName))
         .toList();
+
   }
 
   List<Notifier> _createNotifiers(YamlMap yaml) {

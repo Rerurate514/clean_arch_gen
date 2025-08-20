@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:clean_arch_gen/src/const/fileTemplate/domain/factory.dart';
 import 'package:clean_arch_gen/src/const/fileTemplate/domain/usecase.dart';
 import 'package:clean_arch_gen/src/models/domain/abstract_repository.dart';
-import 'package:clean_arch_gen/src/models/domain/abstract_usecase.dart';
 import 'package:clean_arch_gen/src/models/domain/entity.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/infrastructure.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/response.dart';
@@ -51,13 +50,11 @@ class DomainFileCreater {
           break;
 
         case DomainLayer.usecase:
-          for (final pair in IterableZip([domain.entities, domain.usecases])) {
-            final entity = pair[0] as Entity;
-            final usecase = pair[1] as AbstractUsecase;
-            final usecaseFile = File("${path.path}/get_${usecase.name.toLowerSnakeCase()}.dart");
+          for (final usecase in domain.usecases) {
+            final usecaseFile = File("${path.path}/${usecase.name.toLowerSnakeCase()}.dart");
             fileSystemService.writeAsString(
               usecaseFile, 
-              createUsecase(entity, usecase)
+              createUsecase(usecase)
             );
           }
           break;

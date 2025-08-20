@@ -3,14 +3,22 @@ import 'package:clean_arch_gen/src/models/infrastructure/response.dart';
 import 'package:clean_arch_gen/src/utils/recase.dart';
 
 String createDataSource(Response response, DataSource datasource){
+    final methods = datasource.methods
+    .map((method) {
+      final params = method.params
+          .map((param) => "${param.type} ${param.name}")
+          .join(', ');
+      return """
+  ${method.returns} ${method.name}($params);
+""";
+    })
+    .join('');
+
   return """
-import '../model/${response.name.toLowerSnakeCase()}_response.dart';
+import '../model/${response.name.toLowerSnakeCase()}.dart';
 
 abstract class ${datasource.name} {
-  Future<${response.name}Response> findById();
-
-  Future<List<${response.name}Response>> findAll();
-  
+${methods}
   void dispose();
 }
 
@@ -18,8 +26,22 @@ abstract class ${datasource.name} {
 }
 
 String createDataSourceImpl(Response response, DataSource datasource){
+  final methods = datasource.methods
+    .map((method) {
+      final params = method.params
+          .map((param) => "${param.type} ${param.name}")
+          .join(', ');
+      return """
+  @override
+  ${method.returns} ${method.name}($params)${method.isAsync ? " async" : ""} {
+    
+  }
+""";
+    })
+    .join('\n\n');
+
   return """
-import '../model/${response.name.toLowerSnakeCase()}_response.dart';
+import '../model/${response.name.toLowerSnakeCase()}.dart';
 import './${datasource.name.toLowerSnakeCase()}.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -34,16 +56,7 @@ ${datasource.name} ${datasource.name.toLowerCamelCase()}Impl (Ref ref) {
 class ${datasource.name}Impl implements ${datasource.name} {
   ${datasource.name}Impl();
 
-  @override
-  Future<${response.name}Response> findById() async {
-    
-  }
-
-  @override
-  Future<List<${response.name}Response>> findAll() async {
-    
-  }
-
+${methods}
   @override
   void dispose() {
 

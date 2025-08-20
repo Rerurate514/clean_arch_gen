@@ -5,15 +5,17 @@ String createModel(Response response){
   return """
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part '${response.name.toLowerSnakeCase()}_response.freezed.dart';
-part '${response.name.toLowerSnakeCase()}_response.g.dart';
+part '${response.name.toLowerSnakeCase()}.freezed.dart';
+part '${response.name.toLowerSnakeCase()}.g.dart';
 
 @freezed
-sealed class ${response.name}Response with _\$${response.name}Response {
-  const factory ${response.name}Response() = _${response.name}Response;
+sealed class ${response.name} with _\$${response.name} {
+  const factory ${response.name}({
 
-  factory ${response.name}Response.fromJson(Map<String, dynamic> json) =>
-      _\$${response.name}ResponseFromJson(json);
+  }) = _${response.name};
+
+  factory ${response.name}.fromJson(Map<String, dynamic> json) =>
+      _\$${response.name}FromJson(json);
 }
 """;
 }

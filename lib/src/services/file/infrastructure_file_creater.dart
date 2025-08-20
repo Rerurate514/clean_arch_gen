@@ -6,11 +6,11 @@ import 'package:clean_arch_gen/src/const/fileTemplate/infrastructure/infrastruct
 import 'package:clean_arch_gen/src/const/fileTemplate/infrastructure/model.dart';
 import 'package:clean_arch_gen/src/const/fileTemplate/infrastructure/repository.dart';
 import 'package:clean_arch_gen/src/const/layers.dart';
+import 'package:clean_arch_gen/src/models/domain/abstract_repository.dart';
 import 'package:clean_arch_gen/src/models/domain/domain.dart';
 import 'package:clean_arch_gen/src/models/domain/entity.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/datasource.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/infrastructure.dart';
-import 'package:clean_arch_gen/src/models/infrastructure/repository.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/response.dart';
 import 'package:clean_arch_gen/src/services/file/file_system_service.dart';
 import 'package:clean_arch_gen/src/utils/recase.dart';
@@ -46,9 +46,9 @@ class InfrastructureFileCreater {
           }
           break;
         case InfrastructureLayer.factory:
-          for (final pair in IterableZip([domain.entities, infra.repositories, infra.responses])) {
+          for (final pair in IterableZip([domain.entities, domain.repositories, infra.responses])) {
             final entity = pair[0] as Entity;
-            final repository = pair[1] as Repository;
+            final repository = pair[1] as AbstractRepository;
             final response = pair[2] as Response;
             final factoryFile = File("${path.path}/${entity.name.toLowerSnakeCase()}_factory_impl.dart");
             fileSystemService.writeAsString(
@@ -59,7 +59,7 @@ class InfrastructureFileCreater {
           break;
         case InfrastructureLayer.model:
           for (final response in infra.responses) {
-            final modelFile = File("${path.path}/${response.name.toLowerSnakeCase()}_response.dart");
+            final modelFile = File("${path.path}/${response.name.toLowerSnakeCase()}.dart");
             fileSystemService.writeAsString(
               modelFile, 
               createModel(response)
@@ -67,9 +67,9 @@ class InfrastructureFileCreater {
           }
           break;
         case InfrastructureLayer.repository:
-          for (final pair in IterableZip([domain.entities, infra.repositories, infra.dataSources])) {
+          for (final pair in IterableZip([domain.entities, domain.repositories, infra.dataSources])) {
             final entity = pair[0] as Entity;
-            final repository = pair[1] as Repository;
+            final repository = pair[1] as AbstractRepository;
             final dataSource = pair[2] as DataSource;
             final repositoryFile = File("${path.path}/${repository.name.toLowerSnakeCase()}_impl.dart");
             fileSystemService.writeAsString(
