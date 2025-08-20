@@ -11,9 +11,9 @@ import 'package:yaml/yaml.dart';
 class DomainFactory {
   Domain createDomain(YamlMap yaml) {
     return Domain(
-      entities: _createEntities(yaml), 
-      usecases: _createUseCases(yaml), 
-      repositories: _createRepositories(yaml)
+      entities: _createEntities(yaml),
+      usecases: _createUseCases(yaml),
+      repositories: _createRepositories(yaml),
     );
   }
 
@@ -39,7 +39,7 @@ class DomainFactory {
         .toList();
   }
 
-  List<AbstractUsecase> _createUseCases(YamlMap yaml) {print(yaml[Paths.domain.path][Paths.domainUseCases.path]);
+  List<AbstractUsecase> _createUseCases(YamlMap yaml) {
     final usecaseYaml = yaml[Paths.domain.path][Paths.domainUseCases.path] as YamlList;
     return usecaseYaml
         .cast<YamlMap>()
@@ -50,8 +50,10 @@ class DomainFactory {
   Iterable<AbstractUsecase> _extractUseCasesFromYaml(YamlMap usecaseYaml) {
     return usecaseYaml.keys.map((usecaseName) {
       final usecaseData = usecaseYaml[usecaseName];
+      print(usecaseYaml);
       final method = _createMethodsForUsecase(usecaseData[Paths.method.path]);
-      return AbstractUsecase(name: usecaseName, method: method);
+      final repositories = (usecaseData[Paths.domainRepositories.path] as YamlList).cast<String>().toList();
+      return AbstractUsecase(name: usecaseName, repositories: repositories, method: method);
     });
   }
 
@@ -60,7 +62,7 @@ class DomainFactory {
     final returns = methodYaml[Paths.returns.path] as String;
     final params = _createParams(methodYaml[Paths.params.path] as YamlList);
     final isAsync = methodYaml[Paths.isAsync.path] ?? false;
-    return Method(name: methodName, returns: returns, params: params, isAsync:  isAsync);
+    return Method(name: methodName, returns: returns, params: params, isAsync: isAsync);
   }
 
   List<AbstractRepository> _createRepositories(YamlMap yaml) {
