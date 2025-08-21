@@ -37,6 +37,8 @@ domain:
           name: String
   usecases:
     - AuthenticateUsecase:
+        repositories: 
+          - UserRepository
         method:
           returns: Future<User>
           params:
