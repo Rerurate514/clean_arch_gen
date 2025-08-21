@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:clean_arch_gen/src/const/fileTemplate/domain/factory.dart';
 import 'package:clean_arch_gen/src/const/fileTemplate/domain/usecase.dart';
-import 'package:clean_arch_gen/src/models/domain/abstract_repository.dart';
 import 'package:clean_arch_gen/src/models/domain/entity.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/infrastructure.dart';
 import 'package:clean_arch_gen/src/models/infrastructure/response.dart';
@@ -38,13 +37,11 @@ class DomainFileCreater {
           break;
 
         case DomainLayer.repository:
-          for (final pair in IterableZip([domain.entities, domain.repositories])) {
-            final entity = pair[0] as Entity;
-            final repository = pair[1] as AbstractRepository;
+          for (final repository in domain.repositories) {
             final repositoryFile = File("${path.path}/${repository.name.toLowerSnakeCase()}.dart");
             fileSystemService.writeAsString(
               repositoryFile,
-              createRepository(entity, repository),
+              createRepository(repository),
             );
           }
           break;
