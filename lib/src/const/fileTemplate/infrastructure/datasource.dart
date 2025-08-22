@@ -38,7 +38,7 @@ String createDataSourceImpl(Response response, DataSource datasource){
   }
 """;
     })
-    .join('\n\n');
+    .join('\n');
 
   return """
 import '../model/${response.name.toLowerSnakeCase()}.dart';
