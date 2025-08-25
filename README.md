@@ -1,29 +1,31 @@
+日本語READMEはこちら : 
+
 # 🚀 Clean Arch Generator for Dart
-`clean_arch_gen`は、YAMLファイルに基づいて**Clean Architecture**のファイルとディレクトリ構造を自動生成するDartパッケージです。ボイラープレートの作成時間を大幅に短縮し、開発者がアプリケーションのロジックに集中できるようにします。
+`clean_arch_gen` is a Dart package that automatically generates **Clean Architecture** files and directory structures based on YAML files. It significantly reduces boilerplate creation time and allows developers to focus on application logic.
 
-## ✨ 特徴
-  - 簡単な設定: シンプルなYAMLファイルで、ドメイン、プレゼンテーション、インフラストラクチャの各レイヤーを定義できます。
-  - 自動生成: エンティティ、ユースケース、リポジトリ、データソースなどのファイルを一括で生成します。
-  - クリーンな構造: Clean Architectureの原則に則った、整理されたファイル構成を提供します。
-  - 拡張可能: 定義ファイルに新しい要素を追加するだけで、簡単に機能を拡張できます。
+## ✨ Features
+- Simple Configuration: Define domain, presentation, and infrastructure layers with a simple YAML file.
+- Auto-generation: Generate entities, use cases, repositories, data sources, and other files in bulk.
+- Clean Structure: Provides an organized file structure that follows Clean Architecture principles.
+- Extensible: Easily extend functionality by simply adding new elements to the definition file.
 
-## ⚙️ 使い方
-### 1\. パッケージのインストール
-`pubspec.yaml`ファイルに以下の依存関係を追加します。
+## ⚙️ Usage
+### 1. Package Installation
+Add the following dependency to your `pubspec.yaml` file.
 
 ```yaml
 dev_dependencies:
   clean_arch_gen: ^1.0.0
 ```
 
-そして、ターミナルで以下のコマンドを実行してパッケージをインストールします。
+Then run the following command in the terminal to install the package.
 
 ```bash
 dart pub get
 ```
 
-### 2\. YAMLファイルの作成
-プロジェクトのあるディレクトリ(おすすめは`lib/feature/機能名/`配下)に、任意の名前（例：`user_auth.yaml`）でYAMLファイルを作成します。以下は、ユーザー認証機能を例としたYAMLファイルです。
+### 2. Creating YAML File
+Create a YAML file with any name (e.g., `user_auth.yaml`) in your project directory (recommended location: `lib/feature/feature_name/`). Below is an example YAML file for user authentication functionality.
 
 ```yaml
 feature_name: UserAuthentication
@@ -81,30 +83,30 @@ presentation:
     - Auth
 ```
 
-### 3\. ファイルの生成
-YAMLファイルを作成したら、以下のコマンドを実行してファイルを生成します。
+### 3. File Generation
+After creating the YAML file, run the following command to generate the files.
 
 ```bash
 dart run clean_arch_gen <path_to_your_yaml_file>
 ```
 
-例：
+Example:
 
 ```bash
 dart run clean_arch_gen C:/Users/User/flutter_app/lib/feature/test/user_auth.yaml
 ```
 
-このコマンドを実行すると、YAMLファイルで定義された構造に基づいて、YAMLファイルと同じディレクトリ内に各レイヤーごとのディレクトリが自動生成されます。
+When you run this command, directories for each layer will be automatically generated in the same directory as the YAML file, based on the structure defined in the YAML file.
 
-また、これらで生成されるモデルファイルは`freezed`を使用しているので、その生成コマンドも一緒に実行します。
+Since the generated model files use `freezed`, run the generation command together:
 ```bash
 flutter pub run build_runner build
 ```
 
-そのあと、`datasource`やリポジトリの処理を書きます。
+After that, write the processing for `datasource` and repositories.
 
-### 4\. 生成されるファイル構造
-上記のYAMLファイルを基に、以下のようなファイルとディレクトリが生成されます。
+### 4. Generated File Structure
+Based on the above YAML file, the following files and directories will be generated:
 
 ```
 lib/
@@ -144,59 +146,59 @@ lib/
 
 -----
 
-## YAMLの書き方
-`clean_arch_gen`のYAMLファイルの書き方は、以下の主要なセクションで構成されています。
+## YAML Writing Guide
+The YAML file structure for `clean_arch_gen` consists of the following main sections:
 
-### 1\. 📂 `feature_name`
-生成する機能の名前を定義します。これは、ファイルやディレクトリの名前付けに使用されます。
+### 1. 📂 `feature_name`
+Defines the name of the feature to be generated. This is used for naming files and directories.
 
 ```yaml
 feature_name: UserAuthentication
 ```
 
-### 2\. 📂 `domain`
-Clean Architectureの**ドメイン層**を定義します。
-  - **`entities`**: アプリケーションのコアデータを表すエンティティを定義します。
-      - `[エンティティ名]`:
-          - `fields`: フィールド名とデータ型をキーとバリューで指定します。
-  - **`usecases`**: ビジネスロジックをカプセル化するユースケースを定義します。
-      - `[ユースケース名]`:
-            `repositories`: 依存関係のあるリポジトリ名をここにリスト形式で定義します。
-            `method`:
-                - `returns`: 返り値の型を指定します。
-                - `params`: メソッドの引数をフィールド名とデータ型のリストで指定します。
-                - `isAsync`: メソッドが非同期かどうかを`true`または`false`で指定します。
-  - **`repositories`**: データアクセスを抽象化するリポジトリを定義します。
-      - `[リポジトリ名]`:
-          - `methods`:
-              - `[メソッド名]`:
-                  - `returns`: 返り値の型を指定します。
-                  - `params`: メソッドの引数をフィールド名とデータ型のリストで指定します。
-                  - `isAsync`: メソッドが非同期かどうかを`true`または`false`で指定します。
+### 2. 📂 `domain`
+Defines the **domain layer** of Clean Architecture.
+- **`entities`**: Defines entities that represent core data of the application.
+    - `[Entity Name]`:
+        - `fields`: Specify field names and data types as key-value pairs.
+- **`usecases`**: Defines use cases that encapsulate business logic.
+    - `[Use Case Name]`:
+        - `repositories`: Define repository names with dependencies here in list format.
+        - `method`:
+            - `returns`: Specify the return type.
+            - `params`: Specify method arguments as a list of field names and data types.
+            - `isAsync`: Specify whether the method is asynchronous with `true` or `false`.
+- **`repositories`**: Defines repositories that abstract data access.
+    - `[Repository Name]`:
+        - `methods`:
+            - `[Method Name]`:
+                - `returns`: Specify the return type.
+                - `params`: Specify method arguments as a list of field names and data types.
+                - `isAsync`: Specify whether the method is asynchronous with `true` or `false`.
 
-### 3\. 📂 `infrastructure`
-Clean Architectureの**インフラストラクチャ層**を定義します。
-  - **`datasources`**: 外部データ（API、データベースなど）にアクセスするデータソースを定義します。
-      - `[データソース名]`:
-          - `methods`:
-              - `[メソッド名]`:
-                  - `returns`: 返り値の型を指定します。
-                  - `params`: メソッドの引数をフィールド名とデータ型のリストで指定します。
-                  - `isAsync`: メソッドが非同期かどうかを`true`または`false`で指定します。
-  - **`responses`**: データソースからの応答を表すモデルを定義します。
-      - `[応答名]`
+### 3. 📂 `infrastructure`
+Defines the **infrastructure layer** of Clean Architecture.
+- **`datasources`**: Defines data sources that access external data (API, database, etc.).
+    - `[Data Source Name]`:
+        - `methods`:
+            - `[Method Name]`:
+                - `returns`: Specify the return type.
+                - `params`: Specify method arguments as a list of field names and data types.
+                - `isAsync`: Specify whether the method is asynchronous with `true` or `false`.
+- **`responses`**: Defines models that represent responses from data sources.
+    - `[Response Name]`
 
-### 4\. 📂 `presentation`
-Clean Architectureの**プレゼンテーション層**を定義します。
-  - **`pages`**: ユーザーインターフェースの画面を定義します。
-      - `[ページ名]`
-  - **`notifiers`**: 画面の状態管理を行うクラスを定義します。
-      - `[Notifier名]`
+### 4. 📂 `presentation`
+Defines the **presentation layer** of Clean Architecture.
+- **`pages`**: Defines user interface screens.
+    - `[Page Name]`
+- **`notifiers`**: Defines classes that manage screen state.
+    - `[Notifier Name]`
 
 ---
 
-## 🤝 貢献
-このプロジェクトはオープンソースです。バグ報告、機能提案、プルリクエストを歓迎します。
+## 🤝 Contributing
+This project is open source. We welcome bug reports, feature suggestions, and pull requests.
 
-## 📄 ライセンス
-このプロジェクトはMITライセンスの下で公開されています。
+## 📄 License
+This project is published under the MIT License.
