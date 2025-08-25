@@ -1,7 +1,7 @@
 name: clean_arch_gen
 description: "A Dart package for clean architecture generation and file execution."
 version: 0.0.1
-homepage: https:rerurate.com
+homepage: https://rerurate.com
 repository: https://github.com/Rerurate514/clean_arch_gen
 
 environment:
