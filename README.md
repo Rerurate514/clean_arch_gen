@@ -1,4 +1,4 @@
-日本語READMEはこちら : 
+日本語READMEはこちら : https://github.com/Rerurate514/clean_arch_gen/blob/develop/README-ja.md
 
 # 🚀 Clean Arch Generator for Dart
 `clean_arch_gen` is a Dart package that automatically generates **Clean Architecture** files and directory structures based on YAML files. It significantly reduces boilerplate creation time and allows developers to focus on application logic.
